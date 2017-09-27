@@ -29,6 +29,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .mvcMatchers("/users").hasAnyAuthority("ADMIN");
+                .mvcMatchers("/rest/**").hasAnyAuthority("ADMIN");
     }
 }
