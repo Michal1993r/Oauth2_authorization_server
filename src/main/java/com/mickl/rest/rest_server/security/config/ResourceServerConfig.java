@@ -31,4 +31,5 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 .mvcMatchers("/rest/**").hasAnyAuthority("ADMIN");
     }
+
 }

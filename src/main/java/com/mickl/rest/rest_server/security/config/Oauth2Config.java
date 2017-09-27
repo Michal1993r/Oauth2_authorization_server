@@ -47,18 +47,22 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
                     User user = userService.getByUsername(name)
                             .orElseThrow(() -> new BadCredentialsException("User Not Found!"));
 
-                    if (user.getPassword().equals(password)) {
+                    if (passwordsMatch(password, user)) {
                         return new UsernamePasswordAuthenticationToken(
                                 authentication.getPrincipal(),
                                 authentication.getCredentials(),
                                 user.getAuthorities());
                     }
 
-                    return null;
+                    throw new BadCredentialsException("Password incorrect!");
                 })
                 .accessTokenConverter(accessTokenConverter())
                 .userDetailsService(userService)
                 .tokenStore(tokenStore());
+    }
+
+    private boolean passwordsMatch(String password, User user) {
+        return user.getPassword().equals(password);
     }
 
     @Override
