@@ -26,6 +26,7 @@ public class User implements UserDetails {
     private String password;
     private boolean enabled;
     private Set<Role> authorities;
+    private String avatar;
 
     public String getId() {
         return id;
@@ -81,5 +82,13 @@ public class User implements UserDetails {
     @Override
     public String getName() {
         return username;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

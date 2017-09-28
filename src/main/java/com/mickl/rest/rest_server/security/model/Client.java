@@ -32,9 +32,17 @@ public class Client implements ClientDetails {
         return clientId;
     }
 
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
     @Override
     public Set<String> getResourceIds() {
         return resourceIds;
+    }
+
+    public void setResourceIds(Set<String> resourceIds) {
+        this.resourceIds = resourceIds;
     }
 
     @Override
@@ -47,6 +55,10 @@ public class Client implements ClientDetails {
         return clientSecret;
     }
 
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
     @Override
     public boolean isScoped() {
         return true;
@@ -57,9 +69,17 @@ public class Client implements ClientDetails {
         return scope;
     }
 
+    public void setScope(Set<String> scope) {
+        this.scope = scope;
+    }
+
     @Override
     public Set<String> getAuthorizedGrantTypes() {
         return authorizedGrantTypes;
+    }
+
+    public void setAuthorizedGrantTypes(Set<String> authorizedGrantTypes) {
+        this.authorizedGrantTypes = authorizedGrantTypes;
     }
 
     @Override
@@ -67,7 +87,11 @@ public class Client implements ClientDetails {
         return registeredRedirectUri;
     }
 
-    private Set<? extends GrantedAuthority> getRoleAsGA(){
+    public void setRegisteredRedirectUri(Set<String> registeredRedirectUri) {
+        this.registeredRedirectUri = registeredRedirectUri;
+    }
+
+    private Set<? extends GrantedAuthority> getRoleAsGA() {
         return authorities;
     }
 
@@ -76,14 +100,26 @@ public class Client implements ClientDetails {
         return (Collection<GrantedAuthority>) getRoleAsGA();
     }
 
+    public void setAuthorities(Set<Role> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public Integer getAccessTokenValiditySeconds() {
-        return null;
+        return accessTokenValiditySeconds;
+    }
+
+    public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
+        this.accessTokenValiditySeconds = accessTokenValiditySeconds;
     }
 
     @Override
     public Integer getRefreshTokenValiditySeconds() {
-        return null;
+        return refreshTokenValiditySeconds;
+    }
+
+    public void setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
+        this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
     }
 
     @Override
