@@ -1,6 +1,7 @@
 package com.mickl.rest.rest_server.security.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,29 +17,30 @@ public class User implements UserDetails {
     static final long serialVersionUID = 1L;
 
     @Id
+    @Getter
     private String id;
 
     @NotNull
+    @Setter
     private String username;
 
     @NotNull
-    @JsonIgnore
+    @Setter
     private String password;
-    private boolean enabled;
-    private Set<Role> authorities;
-    private String avatar;
 
-    public String getId() {
-        return id;
-    }
+    @Setter
+    private boolean enabled;
+
+    @Setter
+    private Set<Role> authorities;
+
+    @Getter
+    @Setter
+    private String avatar;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
-    }
-
-    public void setAuthorities(Set<Role> authorities) {
-        this.authorities = authorities;
     }
 
     @Override
@@ -46,17 +48,9 @@ public class User implements UserDetails {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     @Override
@@ -84,11 +78,4 @@ public class User implements UserDetails {
         return username;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 }

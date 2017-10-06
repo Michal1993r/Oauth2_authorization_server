@@ -1,5 +1,6 @@
 package com.mickl.rest.rest_server.security.model;
 
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,15 +17,24 @@ public class Client implements ClientDetails {
     @Id
     private String id;
     @NotNull
+    @Setter
     private String clientId;
     @NotNull
+    @Setter
     private String clientSecret;
+    @Setter
     private Set<String> resourceIds;
+    @Setter
     private Set<String> scope;
+    @Setter
     private Set<String> authorizedGrantTypes;
+    @Setter
     private Set<String> registeredRedirectUri;
+    @Setter
     private Set<Role> authorities;
+    @Setter
     private Integer accessTokenValiditySeconds;
+    @Setter
     private Integer refreshTokenValiditySeconds;
 
     @Override
@@ -32,17 +42,9 @@ public class Client implements ClientDetails {
         return clientId;
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
     @Override
     public Set<String> getResourceIds() {
         return resourceIds;
-    }
-
-    public void setResourceIds(Set<String> resourceIds) {
-        this.resourceIds = resourceIds;
     }
 
     @Override
@@ -55,10 +57,6 @@ public class Client implements ClientDetails {
         return clientSecret;
     }
 
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
-    }
-
     @Override
     public boolean isScoped() {
         return true;
@@ -69,26 +67,14 @@ public class Client implements ClientDetails {
         return scope;
     }
 
-    public void setScope(Set<String> scope) {
-        this.scope = scope;
-    }
-
     @Override
     public Set<String> getAuthorizedGrantTypes() {
         return authorizedGrantTypes;
     }
 
-    public void setAuthorizedGrantTypes(Set<String> authorizedGrantTypes) {
-        this.authorizedGrantTypes = authorizedGrantTypes;
-    }
-
     @Override
     public Set<String> getRegisteredRedirectUri() {
         return registeredRedirectUri;
-    }
-
-    public void setRegisteredRedirectUri(Set<String> registeredRedirectUri) {
-        this.registeredRedirectUri = registeredRedirectUri;
     }
 
     private Set<? extends GrantedAuthority> getRoleAsGA() {
@@ -100,26 +86,14 @@ public class Client implements ClientDetails {
         return (Collection<GrantedAuthority>) getRoleAsGA();
     }
 
-    public void setAuthorities(Set<Role> authorities) {
-        this.authorities = authorities;
-    }
-
     @Override
     public Integer getAccessTokenValiditySeconds() {
         return accessTokenValiditySeconds;
     }
 
-    public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
-        this.accessTokenValiditySeconds = accessTokenValiditySeconds;
-    }
-
     @Override
     public Integer getRefreshTokenValiditySeconds() {
         return refreshTokenValiditySeconds;
-    }
-
-    public void setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
-        this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
     }
 
     @Override
