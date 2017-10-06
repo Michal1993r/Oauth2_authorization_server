@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 
 @Configuration
 @Profile("mem")
-public class InMemoryTokenConfig {
+public class InMemoryTokenBeans {
 
     @Bean
     public TokenStore tokenStore() {

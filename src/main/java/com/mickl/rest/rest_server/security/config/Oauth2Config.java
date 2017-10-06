@@ -34,7 +34,9 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     public Oauth2Config(@Qualifier("userService") UserService userService,
-                        @Qualifier("clientService") ClientService clientService, TokenStore tokenStore, AccessTokenConverter accessTokenConverter)  {
+                        @Qualifier("clientService") ClientService clientService,
+                        TokenStore tokenStore,
+                        AccessTokenConverter accessTokenConverter) {
         this.userService = userService;
         this.clientService = clientService;
         this.tokenStore = tokenStore;
