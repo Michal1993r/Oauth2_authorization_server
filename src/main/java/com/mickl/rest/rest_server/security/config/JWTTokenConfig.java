@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
-@Profile("jwt")
+@Profile({"jwt", "default"})
 public class JWTTokenConfig {
 
     @Bean
