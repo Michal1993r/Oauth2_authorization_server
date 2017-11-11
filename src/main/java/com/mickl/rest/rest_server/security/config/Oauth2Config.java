@@ -1,6 +1,5 @@
 package com.mickl.rest.rest_server.security.config;
 
-import com.mickl.rest.rest_server.security.model.User;
 import com.mickl.rest.rest_server.security.services.ClientService;
 import com.mickl.rest.rest_server.security.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -46,28 +43,10 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                .authenticationManager(authentication -> {
-                    String name = authentication.getName();
-                    String password = authentication.getCredentials().toString();
-                    User user = userService.getByUsername(name)
-                            .orElseThrow(() -> new BadCredentialsException("User Not Found!"));
-
-                    if (passwordsMatch(password, user)) {
-                        return new UsernamePasswordAuthenticationToken(
-                                authentication.getPrincipal(),
-                                authentication.getCredentials(),
-                                user.getAuthorities());
-                    }
-
-                    throw new BadCredentialsException("Password incorrect!");
-                })
+                .authenticationManager(new MongoAuthenticationManager(userService))
                 .accessTokenConverter(accessTokenConverter)
                 .userDetailsService(userService)
                 .tokenStore(tokenStore);
-    }
-
-    private boolean passwordsMatch(String password, User user) {
-        return user.getPassword().equals(password);
     }
 
     @Override
