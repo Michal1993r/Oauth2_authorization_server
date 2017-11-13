@@ -1,9 +1,12 @@
 package com.mickl.rest.rest_server.security.model;
 
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
 import javax.validation.constraints.NotNull;
@@ -20,7 +23,6 @@ public class Client implements ClientDetails {
     @Setter
     private String clientId;
     @NotNull
-    @Setter
     private String clientSecret;
     @Setter
     private Set<String> resourceIds;
@@ -55,6 +57,10 @@ public class Client implements ClientDetails {
     @Override
     public String getClientSecret() {
         return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = "{bcrypt}".concat(new BCryptPasswordEncoder().encode(clientSecret));
     }
 
     @Override

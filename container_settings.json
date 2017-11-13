@@ -1,0 +1,33 @@
+{
+  "AttachStdin": true,
+  "OpenStdin": true,
+  "Env": [
+    "SPRING_PROFILES_ACTIVE=jwt",
+    "SPRING_DATA_MONGODB_HOST=mongo",
+    "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+  ],
+  "Image": "",
+  "Volumes": {},
+  "ExposedPorts": {
+    "8080/tcp": {},
+    "5005/tcp": {}
+  },
+  "HostConfig": {
+    "Binds": [],
+    "PortBindings": {
+      "8080/tcp": [
+        {
+          "HostIp": "",
+          "HostPort": "8080"
+        }
+      ],
+      "5005/tcp": [
+        {
+          "HostIp": "",
+          "HostPort": "5005"
+        }
+      ]
+    },
+    "_comment": ""
+  }
+}
