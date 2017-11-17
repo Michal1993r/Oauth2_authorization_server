@@ -6,6 +6,8 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
+
 @Service("clientService")
 public class ClientService implements ClientDetailsService {
 
@@ -16,7 +18,7 @@ public class ClientService implements ClientDetailsService {
     }
 
     @Override
-    public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-        return clientRepository.findByClientId(clientId);
+    public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException{
+        return clientRepository.findByClientId(clientId).orElseThrow(() -> new ClientRegistrationException("Client not found!"));
     }
 }

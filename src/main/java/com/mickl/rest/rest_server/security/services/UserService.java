@@ -20,12 +20,12 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository
-                .findOneByUsername(username)
+                .findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
     }
 
     public Optional<com.mickl.rest.rest_server.security.model.User> getByUsername(String username) {
-        return userRepository.findOneByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
 }

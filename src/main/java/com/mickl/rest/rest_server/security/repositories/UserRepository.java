@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface UserRepository extends MongoRepository<User, String> {
-    Optional<User> findOneByUsername(@Param("username") String username);
+    Optional<User> findByUsername(@Param("username") String username);
 }
