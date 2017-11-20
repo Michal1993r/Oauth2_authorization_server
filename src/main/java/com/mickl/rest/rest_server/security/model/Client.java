@@ -88,6 +88,7 @@ public class Client implements ClientDetails {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Collection<GrantedAuthority> getAuthorities() {
         return (Collection<GrantedAuthority>) getRoleAsGA();
     }

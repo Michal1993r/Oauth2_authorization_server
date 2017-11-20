@@ -80,8 +80,13 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
         return defaultTokenServices;
     }
 
+    /**
+     * @deprecated deprecated encoders shouldn't be used any more
+     * although the way to decode them will be provided for existing records
+     */
     @Bean
-    public Map<String, PasswordEncoder> encoders(){
+    @SuppressWarnings("deprecation")
+    public Map<String, PasswordEncoder> encoders() {
         Map<String, PasswordEncoder> encoders = new HashMap<>();
         encoders.put("bcrypt", new BCryptPasswordEncoder());
         encoders.put("noop", NoOpPasswordEncoder.getInstance());
