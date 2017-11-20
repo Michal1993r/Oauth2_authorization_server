@@ -1,11 +1,13 @@
 package com.mickl.rest.rest_server.security.services;
 
+import com.mickl.rest.rest_server.security.model.User;
 import com.mickl.rest.rest_server.security.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Service("userService")
@@ -28,4 +30,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
+    public User createNew(@Valid User user) {
+        return userRepository.save(user);
+    }
 }
