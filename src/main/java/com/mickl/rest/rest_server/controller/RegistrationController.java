@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @RestController
 @Slf4j
 public class RegistrationController {
@@ -21,8 +24,11 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, headers = "Content-Type=application/json")
-    public User createNewUser(@RequestBody User user) {
-        log.debug(user.toString());
+    public User createNewUser(@RequestBody User user, HttpServletResponse response) throws IOException {
+        if (userService.getByUsername(user.getUsername()).isPresent()) {
+            response.sendError(500, "User Already Exists!");
+            return user;
+        }
         return userService.createNew(user);
     }
 }
