@@ -4,10 +4,7 @@ import com.mickl.rest.rest_server.security.model.User;
 import com.mickl.rest.rest_server.security.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -23,7 +20,7 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST, headers = "Content-Type=application/json")
+    @PostMapping(value = "/register", headers = "Content-Type=application/json")
     public User createNewUser(@RequestBody User user, HttpServletResponse response) throws IOException {
         if (userService.getByUsername(user.getUsername()).isPresent()) {
             response.sendError(500, "User Already Exists!");
